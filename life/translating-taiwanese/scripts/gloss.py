@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# `#!/usr/bin/env -S uv run --script` would make ./gloss.py self-bootstrapping, but it hands the
+# direct-invocation path to the rarer case: a machine with Python and no uv then fails with
+# "env: uv: No such file or directory", naming a tool the user never asked for. This way the common
+# case runs directly and the uv-only case has one documented fallback, which ignores the shebang.
 """
 Takes raw Taiwanese text, and build possible list of vocabularies with candidate translations.
 The default source is the MOE Taiwanese dictionary from g0v/moedict-data-twblg.  The result is
@@ -11,6 +15,13 @@ Usage:
     ./gloss.py 這個社會討趁 欲生活越來越無簡單
     ./gloss.py 心悶.txt
 """
+
+# Pure standard library, so there is nothing here to resolve -- the block exists so that a machine
+# with no Python at all can still run this via `uv run --script`, which supplies its own.
+# /// script
+# requires-python = ">=3.10"
+# dependencies = []
+# ///
 
 import argparse
 import json

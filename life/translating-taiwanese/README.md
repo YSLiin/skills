@@ -27,7 +27,7 @@ Taiwan's. Expect misses on terms specific to another Hokkien-speaking region.
 Just this skill:
 
 ```bash
-npx skills add YSLiin/skills/translating-taiwanese
+npx skills add YSLiin/skills --skill translating-taiwanese
 ```
 
 Or the whole collection it lives in:
@@ -40,17 +40,31 @@ Either way, paste Taiwanese text into a conversation afterwards — the skill tr
 or invoke it by name. Cloning the directory into your skills folder (`~/.claude/skills/` for a
 personal skill) works just as well.
 
+### Requirements
+
+Python 3.10 or newer, and nothing else — the glosser is pure standard library, so there is no
+install step and no virtualenv to manage.
+
+macOS ships no usable Python of its own: `/usr/bin/python3` is a Command Line Tools stub that opens
+a graphical installer prompt the first time you run it, which an agent cannot click through. If you
+would rather not install a developer toolchain, [uv](https://docs.astral.sh/uv/) is a single binary
+that brings its own Python:
+
+```bash
+uv run --script scripts/gloss.py "心悶你溫柔的聲"
+```
+
 ## Use
 
 The glosser also stands alone as a CLI, with or without an agent:
 
 ```bash
-cd scripts && ./gloss.py "心悶你溫柔的聲" --pretty
+scripts/gloss.py "心悶你溫柔的聲" --pretty
 ```
 
-It takes a file path, inline text, or stdin, and prints `{term: [candidate, ...]}` as JSON —
-`--pretty` indents it for reading. The first run downloads the dictionary; `--build-dict` refreshes
-it afterwards. Nothing else touches the network.
+It takes a file path, inline text, or stdin, runs from any working directory, and prints
+`{term: [candidate, ...]}` as JSON — `--pretty` indents it for reading. The first run downloads the
+dictionary; `--build-dict` refreshes it afterwards. Nothing else touches the network.
 
 ## Customization
 
@@ -70,3 +84,21 @@ takes synonyms before definitions from every heteronym of an entry; narrow or wi
 the model writes is governed by step 2 of [`SKILL.md`](SKILL.md), which carries a register table
 (article / lyrics / plain prose / oral) — that is the place to add house style or a target variety
 of Mandarin.
+
+## License
+
+The code and documentation here are MIT-licensed — full text in [LICENSE](../../LICENSE) at the
+root of the [skills repository](https://github.com/YSLiin/skills).
+
+The dictionary is not. 臺灣閩南語常用詞辭典 is the work of the Ministry of Education, Republic of
+China (Taiwan) — 教育部《臺灣閩南語常用詞辭典》 — released under
+[CC BY-ND 3.0 TW](https://creativecommons.org/licenses/by-nd/3.0/tw/), and reached here through
+[g0v/moedict-data-twblg](https://github.com/g0v/moedict-data-twblg), whose format conversions are
+CC0.
+
+**ND means no derivatives may be redistributed**, and the flattened lookup table that
+`scripts/dictionary.py` builds is a derivative. This skill ships none of it: the data is downloaded
+to your own machine on first run and never travels further. Keep it that way — caching a prebuilt
+lookup file into this repo to save the download would cross the line the current design stays
+behind.
+

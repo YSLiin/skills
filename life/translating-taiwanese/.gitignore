@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+
+# Dictionary data stays out of git, and not just to keep the repo small: MOE releases 臺灣閩南語常用詞辭典
+# under CC BY-ND, which forbids redistributing a derivative. The flattened lookup dictionary.py
+# builds is exactly that. Downloading it per-machine at first run is what keeps us on the right
+# side of the line -- committing a copy to skip the download might not.
+*.json
+*.txt

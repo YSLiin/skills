@@ -16,13 +16,17 @@ you have never seen.
 
 ## 1. Gloss the source
 
-Run from this skill's `scripts/` directory, on the whole source text:
+Run this skill's `scripts/gloss.py` on the whole source text. Any working directory will do — give
+it the path:
 
 ```bash
-./gloss.py path/to/lyrics.txt  # file path
-./gloss.py "無你我欲去佗位 我愛你毋但彼當時"  # inline
-printf '%s' "$text" | ./gloss.py  # stdin
+scripts/gloss.py path/to/lyrics.txt  # file path
+scripts/gloss.py "無你我欲去佗位 我愛你毋但彼當時"  # inline
+printf '%s' "$text" | scripts/gloss.py  # stdin
 ```
+
+Where `python3` is missing — a Mac with no developer tools — `uv run --script scripts/gloss.py …`
+runs it on a Python uv supplies itself.
 
 The first run downloads the dictionary (~2 MB, a few seconds). Pass `--build-dict` to refresh it.
 Leave `--pretty` off — it is for humans reading the JSON, not for you.

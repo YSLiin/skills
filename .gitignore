@@ -1,0 +1,5 @@
+# Repo-level only. Each skill keeps its own .gitignore for whatever it generates, so one skill
+# ignoring *.json never binds another.
+
+.claude/settings.local.json
+.DS_Store
