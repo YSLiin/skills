@@ -1,4 +1,4 @@
-# translating-taiwanese
+# translate-taiwanese
 
 A Claude skill for translating Taiwanese into natural Mandarin.
 
@@ -27,7 +27,7 @@ Taiwan's. Expect misses on terms specific to another Hokkien-speaking region.
 Just this skill:
 
 ```bash
-npx skills add YSLiin/skills --skill translating-taiwanese
+npx skills add YSLiin/skills --skill translate-taiwanese
 ```
 
 Or the whole collection it lives in:
@@ -75,9 +75,11 @@ database, a remote API — drops in unchanged. The current pair pulls two flat J
 [g0v/moedict-data-twblg](https://github.com/g0v/moedict-data-twblg), which republishes the MOE
 dictionary (~20,000 terms, a few MB) with no network access needed at query time.
 
-**Where the data lives.** `$XDG_DATA_HOME/translating-taiwanese`, falling back to
-`~/.local/share/translating-taiwanese` — outside the skill directory, which gets replaced wholesale
+**Where the data lives.** `$XDG_DATA_HOME/translate-taiwanese`, falling back to
+`~/.local/share/translate-taiwanese` — outside the skill directory, which gets replaced wholesale
 on update and is not guaranteed writable. `_meta.json` alongside it records the source and sync time.
+If you used the skill before it was renamed, `~/.local/share/translating-taiwanese` is stale and
+safe to delete; the first run re-downloads into the new path.
 
 **Tuning the translation itself.** The candidate list is built by `_candidates_for_entry()`, which
 takes synonyms before definitions from every heteronym of an entry; narrow or widen it there. How

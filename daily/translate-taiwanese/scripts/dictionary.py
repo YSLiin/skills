@@ -29,7 +29,7 @@ FILES = ['dict-twblg.json', 'dict-twblg-ext.json']
 # isn't guaranteed writable. ~/.local/share is the XDG default and the convention CLI tools follow
 # on macOS too, so one fallback covers both platforms.
 DATA_HOME = Path(os.environ.get('XDG_DATA_HOME') or Path.home() / '.local' / 'share')
-OUTPUT_DIR = DATA_HOME / 'translating-taiwanese'
+OUTPUT_DIR = DATA_HOME / 'translate-taiwanese'
 LOOKUP_FILE = OUTPUT_DIR / 'twblg_lookup.json'
 META_FILE = OUTPUT_DIR / '_meta.json'
 

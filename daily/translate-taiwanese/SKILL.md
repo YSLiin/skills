@@ -1,5 +1,5 @@
 ---
-name: translating-taiwanese
+name: translate-taiwanese
 description: >-
   Translate Taiwanese (台語) into natural Mandarin, glossing every term against the MOE dictionary
   before composing. Use when the user shares Taiwanese/Hokkien text — lyrics, an article, or a line
